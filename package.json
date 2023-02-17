@@ -1,6 +1,6 @@
 {
   "name": "@nyffels/html-to-pdf",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A docker server with Swagger API implemented to convert HTML code to PDF document.",
   "main": "index.js",
   "scripts": {
