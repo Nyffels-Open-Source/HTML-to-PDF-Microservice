@@ -1,6 +1,6 @@
 {
   "name": "@nyffels/html-to-pdf",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "A docker server with Swagger API implemented to convert HTML code to PDF document.",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,15 @@
     "ext": "ts",
     "exec": "ts-node src/index.ts"
   },
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Nyffels-IT/HTML-to-PDF-Docker-Swagger-API",
+		"homepage": "https://github.com/Nyffels-IT/HTML-to-PDF-Docker-Swagger-API"
+	},
+	"bugs": {
+		"url": "https://github.com/RyanTheAllmighty/Docker-Hub-API/issues",
+		"email": "chesney@nyffels.be"
+	},
   "keywords": [],
   "author": {
     "name": "Chesney Nyffels",
