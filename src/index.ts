@@ -5,7 +5,7 @@ import crypto from 'crypto';
 
 import Router from './routes';
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 80;
 if (!process.env.CODE) process.env.Code = crypto.randomBytes(20).toString('hex');
 
 const app: Application = express();
