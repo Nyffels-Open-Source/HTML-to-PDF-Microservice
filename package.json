@@ -25,7 +25,7 @@
     "email": "chesney@nyffels.be",
     "url": "http://nyffels.be"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/morgan": "^1.9.4",

@@ -7,7 +7,7 @@
     "securityDefinitions": {
       "authorization": {
         "type": "apiKey",
-        "name": "authorization",
+        "name": "Authorization",
         "in": "header"
       }
     }

@@ -22,6 +22,161 @@
 				"properties": {
 					"html": {
 						"type": "string"
+					},
+					"options": {
+						"properties": {
+							"timeout": {
+								"type": "number",
+								"format": "double",
+								"description": "Timeout in milliseconds. Pass `0` to disable timeout."
+							},
+							"omitBackground": {
+								"type": "boolean",
+								"description": "Hides default white background and allows generating pdfs with transparency."
+							},
+							"path": {
+								"type": "string",
+								"description": "The path to save the file to."
+							},
+							"margin": {
+								"properties": {
+									"right": {
+										"anyOf": [
+											{
+												"type": "string"
+											},
+											{
+												"type": "number",
+												"format": "double"
+											}
+										]
+									},
+									"left": {
+										"anyOf": [
+											{
+												"type": "string"
+											},
+											{
+												"type": "number",
+												"format": "double"
+											}
+										]
+									},
+									"bottom": {
+										"anyOf": [
+											{
+												"type": "string"
+											},
+											{
+												"type": "number",
+												"format": "double"
+											}
+										]
+									},
+									"top": {
+										"anyOf": [
+											{
+												"type": "string"
+											},
+											{
+												"type": "number",
+												"format": "double"
+											}
+										]
+									}
+								},
+								"type": "object",
+								"description": "Set the PDF margins."
+							},
+							"preferCSSPageSize": {
+								"type": "boolean",
+								"description": "Give any CSS `@page` size declared in the page priority over what is\r\ndeclared in the `width` or `height` or `format` option."
+							},
+							"height": {
+								"anyOf": [
+									{
+										"type": "string"
+									},
+									{
+										"type": "number",
+										"format": "double"
+									}
+								],
+								"description": "Sets the height of paper. You can pass in a number or a string with a unit."
+							},
+							"width": {
+								"anyOf": [
+									{
+										"type": "string"
+									},
+									{
+										"type": "number",
+										"format": "double"
+									}
+								],
+								"description": "Sets the width of paper. You can pass in a number or a string with a unit."
+							},
+							"format": {
+								"type": "string",
+								"enum": [
+									"letter",
+									"legal",
+									"tabloid",
+									"ledger",
+									"a0",
+									"a1",
+									"a2",
+									"a3",
+									"a4",
+									"a5",
+									"a6"
+								]
+							},
+							"pageRanges": {
+								"type": "string",
+								"description": "Paper ranges to print, e.g. `1-5, 8, 11-13`."
+							},
+							"landscape": {
+								"type": "boolean",
+								"description": "Whether to print in landscape orientation."
+							},
+							"printBackground": {
+								"type": "boolean",
+								"description": "Set to `true` to print background graphics."
+							},
+							"footerTemplate": {
+								"type": "string",
+								"enum": [
+									"date",
+									"title",
+									"url",
+									"pageNumber",
+									"totalPages"
+								],
+								"description": "HTML template for the print footer. Has the same constraints and support\r\nfor special classes as {@link PDFOptions.headerTemplate }."
+							},
+							"headerTemplate": {
+								"type": "string",
+								"enum": [
+									"date",
+									"title",
+									"url",
+									"pageNumber",
+									"totalPages"
+								],
+								"description": "HTML template for the print header. Should be valid HTML with the following\r\nclasses used to inject values into them:\r\n\r\n- `date` formatted print date\r\n\r\n- `title` document title\r\n\r\n- `url` document location\r\n\r\n- `pageNumber` current page number\r\n\r\n- `totalPages` total pages in the document"
+							},
+							"displayHeaderFooter": {
+								"type": "boolean",
+								"description": "Whether to show the header and footer."
+							},
+							"scale": {
+								"type": "number",
+								"format": "double",
+								"description": "Scales the rendering of the web page. Amount must be between `0.1` and `2`."
+							}
+						},
+						"type": "object"
 					}
 				},
 				"required": [
@@ -46,7 +201,7 @@
 		"securitySchemes": {
 			"authorization": {
 				"type": "apiKey",
-				"name": "authorization",
+				"name": "Authorization",
 				"in": "header"
 			}
 		}
@@ -56,7 +211,7 @@
 		"version": "0.1.0",
 		"description": "A docker server with Swagger API implemented to convert HTML code to PDF document.",
 		"license": {
-			"name": "ISC"
+			"name": "MIT"
 		},
 		"contact": {
 			"name": "Chesney Nyffels",

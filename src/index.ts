@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
-import swaggerUi from "swagger-ui-express";
-import crypto from "crypto";
+import swaggerUi from 'swagger-ui-express';
+import crypto from 'crypto';
 
 import Router from './routes';
 
@@ -15,25 +15,19 @@ app.use(morgan('tiny'));
 app.use(express.static('public'));
 
 app.use(
-  "/documentation",
+  '/documentation',
   swaggerUi.serve,
   swaggerUi.setup(undefined, {
-		customSiteTitle: "HTML to PDF",
+    customSiteTitle: 'HTML to PDF',
     swaggerOptions: {
-      url: "/swagger.json",
+      url: '/swagger.json',
     },
   })
 );
 
-app.use((req, res, next) => {
-	console.log(req.headers.authorization);
-	if (process.env.CODE != req.headers.authorization) throw new Error("Incorrect api key. More information: https://github.com/Nyffels-IT/HTML-to-PDF-Socker-Swagger-API");
-	next();
-});
-
 app.use(Router);
 
 app.listen(PORT, () => {
-	console.log('Server is running on port', PORT);
-	console.log('Authorization code:', process.env.CODE);
+  console.log('Server is running on port', PORT);
+  console.log('Authorization code:', process.env.CODE);
 });
