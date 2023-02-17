@@ -1,12 +1,13 @@
-import { Get, Route } from "tsoa";
+import { Get, Route, Security } from 'tsoa';
 
 interface StatusResponse {
   active: boolean;
 }
 
-@Route("status")
+@Route('status')
 export default class StatusController {
-	@Get("/")
+	@Security("authorization")
+  @Get('/')
   public async getMessage(): Promise<StatusResponse> {
     return {
       active: true,

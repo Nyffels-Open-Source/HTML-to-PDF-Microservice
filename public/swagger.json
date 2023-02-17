@@ -6,6 +6,30 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"PdfResponse": {
+				"properties": {
+					"base64": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"base64"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PdfRequest": {
+				"properties": {
+					"html": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"html"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"StatusResponse": {
 				"properties": {
 					"active": {
@@ -19,7 +43,13 @@
 				"additionalProperties": false
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"authorization": {
+				"type": "apiKey",
+				"name": "authorization",
+				"in": "header"
+			}
+		}
 	},
 	"info": {
 		"title": "@nyffels/html-to-pdf",
@@ -36,6 +66,39 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
+		"/html": {
+			"post": {
+				"operationId": "ConvertHtmlToPdf",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PdfResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"authorization": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PdfRequest"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/status": {
 			"get": {
 				"operationId": "GetMessage",
@@ -51,7 +114,11 @@
 						}
 					}
 				},
-				"security": [],
+				"security": [
+					{
+						"authorization": []
+					}
+				],
 				"parameters": []
 			}
 		}

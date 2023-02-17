@@ -6,13 +6,21 @@ import crypto from "crypto";
 import Router from './routes';
 
 const PORT = process.env.PORT || 8000;
-const CONNECTION_CODE = process.env.CODE || crypto.randomBytes(20).toString('hex');
+if (!process.env.CODE) process.env.Code = crypto.randomBytes(20).toString('hex');
 
 const app: Application = express();
 
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(express.static('public'));
+
+// app.use((req, res, next) => {
+// 	console.log(req.headers.authorization);
+// 	if (process.env.CODE != req.headers.authorization) throw new Error("Incorrect api key. More information: https://github.com/Nyffels-IT/HTML-to-PDF-Socker-Swagger-API");
+// 	next();
+// });
+
+app.use(Router);
 
 app.use(
   "/documentation",
@@ -25,9 +33,7 @@ app.use(
   })
 );
 
-app.use(Router);
-
 app.listen(PORT, () => {
 	console.log('Server is running on port', PORT);
-	if (!process.env.CODE) console.log('Authorization set to random code', CONNECTION_CODE);
+	console.log('Authorization code:', process.env.CODE);
 });
