@@ -15,6 +15,6 @@ RUN apt-get update && apt-get install gnupg wget -y && \
 # Install application
 WORKDIR /app
 COPY . .
-RUN npm install --only=prod
+RUN npm install
 EXPOSE 80
 CMD npm run start
