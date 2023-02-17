@@ -1,0 +1,64 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"StatusResponse": {
+				"properties": {
+					"active": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"active"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "@nyffels/html-to-pdf",
+		"version": "0.1.0",
+		"description": "A docker server with Swagger API implemented to convert HTML code to PDF document.",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Chesney Nyffels",
+			"email": "chesney@nyffels.be",
+			"url": "http://nyffels.be"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/status": {
+			"get": {
+				"operationId": "GetMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/StatusResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
