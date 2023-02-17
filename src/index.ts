@@ -5,16 +5,16 @@ import crypto from 'crypto';
 import bodyParser from 'body-parser';
 
 import Router from './routes';
+import { authentication } from './middleware/middleware';
 
 const PORT = process.env.PORT || 80;
 if (!process.env.CODE) process.env.Code = crypto.randomBytes(20).toString('hex');
 
 const app: Application = express();
-
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(express.static('public'));
-app.use(bodyParser.json({ limit: '50mb' }));
 
 app.use(
   '/documentation',
@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-app.use(Router);
+app.use(authentication, Router);
 
 app.listen(PORT, () => {
   console.log('Server is running on port', PORT);

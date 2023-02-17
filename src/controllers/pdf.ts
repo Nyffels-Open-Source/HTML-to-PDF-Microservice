@@ -114,7 +114,8 @@ export default class PdfController {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
-    await page.goto(`data:text/html,${request.html}`, { waitUntil: 'networkidle0' });
+		await page.setContent(request.html);
+    // await page.goto(`data:text/html,${request.html}`, { waitUntil: 'networkidle0' });
     const pdfBuffer = await page.pdf(request.options);
     await browser.close();
 
