@@ -32,12 +32,12 @@ interface PdfRequest {
      *
      * - `totalPages` total pages in the document
      */
-    headerTemplate?: 'date' | 'title' | 'url' | 'pageNumber' | 'totalPages';
+    headerTemplate?: string;
     /**
      * HTML template for the print footer. Has the same constraints and support
      * for special classes as {@link PDFOptions.headerTemplate}.
      */
-    footerTemplate?: 'date' | 'title' | 'url' | 'pageNumber' | 'totalPages';
+    footerTemplate?: string;
     /**
      * Set to `true` to print background graphics.
      * @defaultValue false

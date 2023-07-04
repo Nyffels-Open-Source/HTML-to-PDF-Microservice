@@ -146,24 +146,10 @@
 							},
 							"footerTemplate": {
 								"type": "string",
-								"enum": [
-									"date",
-									"title",
-									"url",
-									"pageNumber",
-									"totalPages"
-								],
 								"description": "HTML template for the print footer. Has the same constraints and support\r\nfor special classes as {@link PDFOptions.headerTemplate }."
 							},
 							"headerTemplate": {
 								"type": "string",
-								"enum": [
-									"date",
-									"title",
-									"url",
-									"pageNumber",
-									"totalPages"
-								],
 								"description": "HTML template for the print header. Should be valid HTML with the following\r\nclasses used to inject values into them:\r\n\r\n- `date` formatted print date\r\n\r\n- `title` document title\r\n\r\n- `url` document location\r\n\r\n- `pageNumber` current page number\r\n\r\n- `totalPages` total pages in the document"
 							},
 							"displayHeaderFooter": {
@@ -208,7 +194,7 @@
 	},
 	"info": {
 		"title": "@nyffels/html-to-pdf",
-		"version": "1.4.0",
+		"version": "1.4.1",
 		"description": "A docker server with Swagger API implemented to convert HTML code to PDF document.",
 		"license": {
 			"name": "MIT"
