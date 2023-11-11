@@ -8,7 +8,7 @@ env:
 
 jobs:
   initialize:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     outputs:
       version: ${{ env.PACKAGE_VERSION }}
 
@@ -24,7 +24,7 @@ jobs:
         run: 'echo Verion: ${{ env.PACKAGE_VERSION }}'
 
   build-publish:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: initialize
 
     steps:
