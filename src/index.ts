@@ -7,7 +7,7 @@ import bodyParser from 'body-parser';
 import Router from './routes';
 import { authentication } from './middleware/middleware';
 
-const PORT = process.env.PORT || 80;
+const PORT = 80;
 if (!process.env.CODE) process.env.Code = crypto.randomBytes(20).toString('hex');
 
 const app: Application = express();
