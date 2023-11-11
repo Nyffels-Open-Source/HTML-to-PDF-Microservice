@@ -194,7 +194,6 @@
 	},
 	"info": {
 		"title": "@nyffels/html-to-pdf",
-		"version": "1.4.1",
 		"description": "A docker server with Swagger API implemented to convert HTML code to PDF document.",
 		"license": {
 			"name": "MIT"
