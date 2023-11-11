@@ -68,7 +68,6 @@ jobs:
           USERNAME: ${{ env.DOCKER_USERNAME }}
           PASSWORD: ${{ env.DOCKER_PASSWORD }}
         run: |
-          cd ./code/compiled/web/
           sudo docker login -u $USERNAME -p $PASSWORD
           sudo docker push nyffelsit/html-to-pdf:$VERSION
 
