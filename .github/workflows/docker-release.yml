@@ -23,58 +23,58 @@ jobs:
       - name: Current version
         run: 'echo Verion: ${{ env.PACKAGE_VERSION }}'
 
-    build-publish:
-      runs-on: self-hosted
-      needs: initialize
+  build-publish:
+    runs-on: self-hosted
+    needs: initialize
 
-      steps:
-        - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-        - name: Set up NodeJS
-          uses: actions/setup-node@v3
-          with:
-            node-version: ${{ env.NODE_VERSION }}
+      - name: Set up NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
-        - name: Code initialization
-          run: npm install
+      - name: Code initialization
+        run: npm install
 
-        - name: Build code
-          run: |
-            npm run prebuild
-            npm run build
+      - name: Build code
+        run: |
+          npm run prebuild
+          npm run build
 
-        - name: Build Web image
-          env:
-            VERSION: ${{ needs.initialize.outputs.version }}
-          run: |
-            sudo docker build . -t nyffelsit/html-to-pdf:$VERSION
-            sudo docker build . -t nyffelsit/html-to-pdf:latest
+      - name: Build Web image
+        env:
+          VERSION: ${{ needs.initialize.outputs.version }}
+        run: |
+          sudo docker build . -t nyffelsit/html-to-pdf:$VERSION
+          sudo docker build . -t nyffelsit/html-to-pdf:latest
 
-        - name: Configure 1Password Service Account
-          uses: 1password/load-secrets-action/configure@v1
-          with:
-            service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+      - name: Configure 1Password Service Account
+        uses: 1password/load-secrets-action/configure@v1
+        with:
+          service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
-        - name: Load Docker Credentials
-          id: load-docker-credentials
-          uses: 1password/load-secrets-action@v1
-          env:
-            DOCKER_USERNAME: op://r6q232hyrdemhfia2gfluwijj4/wcpo5coqyshf5ngh6mxyojvmu4/username
-            DOCKER_PASSWORD: op://r6q232hyrdemhfia2gfluwijj4/wcpo5coqyshf5ngh6mxyojvmu4/password
+      - name: Load Docker Credentials
+        id: load-docker-credentials
+        uses: 1password/load-secrets-action@v1
+        env:
+          DOCKER_USERNAME: op://r6q232hyrdemhfia2gfluwijj4/wcpo5coqyshf5ngh6mxyojvmu4/username
+          DOCKER_PASSWORD: op://r6q232hyrdemhfia2gfluwijj4/wcpo5coqyshf5ngh6mxyojvmu4/password
 
-        - name: Publish web image
-          env:
-            VERSION: ${{ needs.initialize.outputs.version }}
-            USERNAME: ${{ env.DOCKER_USERNAME }}
-            PASSWORD: ${{ env.DOCKER_PASSWORD }}
-          run: |
-            cd ./code/compiled/web/
-            sudo docker login -u $USERNAME -p $PASSWORD
-            sudo docker push nyffelsit/html-to-pdf:$VERSION
+      - name: Publish web image
+        env:
+          VERSION: ${{ needs.initialize.outputs.version }}
+          USERNAME: ${{ env.DOCKER_USERNAME }}
+          PASSWORD: ${{ env.DOCKER_PASSWORD }}
+        run: |
+          cd ./code/compiled/web/
+          sudo docker login -u $USERNAME -p $PASSWORD
+          sudo docker push nyffelsit/html-to-pdf:$VERSION
 
-        - name: Clean Web image
-          env:
-            VERSION: ${{ needs.initialize.outputs.version }}
-          run: |
-            sudo docker rmi nyffelsit/html-to-pdf:latest
-            sudo docker rmi nyffelsit/html-to-pdf:$VERSION
+      - name: Clean Web image
+        env:
+          VERSION: ${{ needs.initialize.outputs.version }}
+        run: |
+          sudo docker rmi nyffelsit/html-to-pdf:latest
+          sudo docker rmi nyffelsit/html-to-pdf:$VERSION
