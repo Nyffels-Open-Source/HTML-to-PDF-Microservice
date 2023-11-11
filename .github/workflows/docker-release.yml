@@ -4,7 +4,7 @@ on:
     branches: ['main']
 
 env:
-  NODE_VERSION: 18'
+  NODE_VERSION: 18
 
 jobs:
   initialize:
