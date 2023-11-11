@@ -1,10 +1,10 @@
 # HTML to PDF Docker swagger server
 
-A docker server with Swagger API implemented to convert HTML code to PDF document.
+A docker server with Swagger API implemented to convert HTML code to a PDF document.
 
 ## Installation
 
-use "docker run -d --restart unless-stopped nyffelsit/html-to-pdf" to start the server. All the configuration is done by environment variables. 
+use "docker run -d --restart unless-stopped nyffelsit/html-to-pdf" to start the server. 
 
 Possible environment variables are: 
 - CODE = The api key that can be used, if left empty, the server will generate a different one on every startup. 
