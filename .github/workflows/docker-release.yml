@@ -70,6 +70,7 @@ jobs:
         run: |
           sudo docker login -u $USERNAME -p $PASSWORD
           sudo docker push nyffelsit/html-to-pdf:$VERSION
+          sudo docker push nyffelsit/html-to-pdf:latest
 
       - name: Clean Web image
         env:
