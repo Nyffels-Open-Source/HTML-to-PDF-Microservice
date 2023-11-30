@@ -16,4 +16,9 @@ router.post("/html", async (_req, res) => {
 	return res.send(response);
 });
 
+// router.post('async/html', async (_req, res) => {
+//   // const controller = new PdfController();
+//   return res.send("OK");
+// })
+
 export default router;

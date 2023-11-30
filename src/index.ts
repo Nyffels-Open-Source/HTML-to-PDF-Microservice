@@ -7,7 +7,10 @@ import bodyParser from 'body-parser';
 import Router from './routes';
 import { authentication } from './middleware/middleware';
 
-const PORT = 8050;
+import { config } from 'dotenv';
+config();
+
+if (!process.env.PORT) process.env.PORT = '' + 80;
 if (!process.env.CODE) process.env.Code = crypto.randomBytes(20).toString('hex');
 
 const app: Application = express();
@@ -29,7 +32,7 @@ app.use(
 
 app.use(authentication, Router);
 
-app.listen(PORT, () => {
-  console.log('Server is running on port', PORT);
+app.listen(+process.env.PORT, () => {
+  console.log('Server is running on port', process.env.PORT);
   console.log('Authorization code:', process.env.CODE);
 });
