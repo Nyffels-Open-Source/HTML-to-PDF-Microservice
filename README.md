@@ -8,6 +8,7 @@ use "docker run -d --restart unless-stopped nyffelsit/html-to-pdf" to start the 
 
 Possible environment variables are: 
 - CODE = The api key that can be used, if left empty, the server will generate a different one on every startup. 
+- PORT = The port that the application has to use.
 
 ## Usage
 
