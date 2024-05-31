@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "predev": "npm run swagger",
     "prebuild": "npm run swagger",
-    "build": "tsc",
+    "build": "tsc && gulp",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "swagger": "tsoa spec"
   },
@@ -50,6 +50,8 @@
     "@types/joi": "^17.2.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "gulp": "^5.0.0",
+    "gulp-install": "^1.1.0",
     "morgan": "^1.10.0",
     "puppeteer": "^22.10.0",
     "swagger-ui-express": "^5.0.0",

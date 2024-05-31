@@ -49,7 +49,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./dist
           pull: true
           push: true
           tags: nyffelsit/html-to-pdf:${{ needs.setup.outputs.version }}, nyffelsit/html-to-pdf:latest               

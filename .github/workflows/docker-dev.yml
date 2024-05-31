@@ -10,7 +10,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ env.PACKAGE_VERSION }}
+      version: ${{ env.VERSION }}
 
     steps:
       - name: Set Version
@@ -19,7 +19,7 @@ jobs:
           prefix: 'DEV-'
             
       - name: Current version
-        run: 'echo Verion: ${{ env.PACKAGE_VERSION }}'
+        run: 'echo Verion: ${{ env.VERSION }}'
 
   build-publish:
     runs-on: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./dist
           pull: true
           push: true
           tags: nyffelsit/html-to-pdf:${{ needs.setup.outputs.version }}, nyffelsit/html-to-pdf:latest
