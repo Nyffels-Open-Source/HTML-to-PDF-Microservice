@@ -113,7 +113,7 @@ export default class PdfController {
   public async convertHtmlToPdf(@Body() request: PdfRequest): Promise<PdfResponse> {
     const browser = await puppeteer.launch({
 			executablePath: '/usr/bin/google-chrome',
-      headless: 'new',
+      headless: true,
 			args: ['--no-sandbox',]
 		});
     const page = await browser.newPage();

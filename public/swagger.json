@@ -1,4 +1,5 @@
 {
+	"openapi": "3.0.0",
 	"components": {
 		"examples": {},
 		"headers": {},
@@ -204,7 +205,6 @@
 			"url": "http://nyffels.be"
 		}
 	},
-	"openapi": "3.0.0",
 	"paths": {
 		"/html": {
 			"post": {
