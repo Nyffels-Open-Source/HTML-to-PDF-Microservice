@@ -8,14 +8,14 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ env.PACKAGE_VERSION }}
+      version: ${{ env.VERSION }}
 
     steps:
       - name: Set Version
         uses: Nyffels-IT/github-actions-calver-version-generator@v1.0.1
 
       - name: Current version
-        run: 'echo Verion: ${{ env.PACKAGE_VERSION }}'
+        run: 'echo Verion: ${{ env.VERSION }}'
 
   build-publish:
     runs-on: ubuntu-latest
