@@ -119,7 +119,6 @@ export default class PdfController {
     const page = await browser.newPage();
 
 		await page.setContent(request.html);
-    // await page.goto(`data:text/html,${request.html}`, { waitUntil: 'networkidle0' });
     const pdfBuffer = await page.pdf(request.options);
     await browser.close();
 
