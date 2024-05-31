@@ -12,8 +12,8 @@ gulp.task('default', function () {
         args: ['--force'],
       })
     )
-    // .pipe(gulp.src(['./.dockerignore']))
-    // .pipe(gulp.dest(PROD_DEST))
+    .pipe(gulp.src(['./.dockerignore']))
+    .pipe(gulp.dest(PROD_DEST))
     .pipe(gulp.src(['./Dockerfile']))
     .pipe(gulp.dest(PROD_DEST));
 });
