@@ -1,8 +1,15 @@
 import express from "express";
 import PdfController from "../controllers/pdf";
 import StatusController from "../controllers/status";
+import swaggerUi from "swagger-ui-express";
 
 const router = express.Router();
+
+router.use("/swagger", swaggerUi.serve, swaggerUi.setup(undefined, {
+  swaggerOptions: {
+    url: "/swagger.json"
+  }
+}));
 
 router.get("/status", async (_req, res) => {
   const controller = new StatusController();
