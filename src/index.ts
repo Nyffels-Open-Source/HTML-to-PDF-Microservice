@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
+import jsonData from "./swagger.json";
 import swaggerUi from 'swagger-ui-express';
 import crypto from 'crypto';
 import bodyParser from 'body-parser';
@@ -19,10 +20,12 @@ app.use(express.json());
 app.use(morgan('tiny'));
 app.use(express.static('public'));
 
-app.use(
-  '/documentation',
-  swaggerUi.serve,
-  swaggerUi.setup(undefined, {
+app.get('/swagger.json', (req, res) => {
+  res.send(jsonData);
+});
+
+
+app.use('/documentation', swaggerUi.serve, swaggerUi.setup(undefined, {
     customSiteTitle: 'HTML to PDF',
     swaggerOptions: {
       url: '/swagger.json',

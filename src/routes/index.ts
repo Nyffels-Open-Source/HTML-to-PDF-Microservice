@@ -5,12 +5,6 @@ import swaggerUi from "swagger-ui-express";
 
 const router = express.Router();
 
-router.use("/swagger", swaggerUi.serve, swaggerUi.setup(undefined, {
-  swaggerOptions: {
-    url: "/swagger.json"
-  }
-}));
-
 router.get("/status", async (_req, res) => {
   const controller = new StatusController();
   const response = await controller.getMessage();
