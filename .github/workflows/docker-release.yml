@@ -52,4 +52,4 @@ jobs:
           context: ./dist
           pull: true
           push: true
-          tags: nyffelsit/html-to-pdf:${{ needs.setup.outputs.version }}, nyffelsit/html-to-pdf:latest               
+          tags: nyffels/html-to-pdf:${{ needs.setup.outputs.version }}, nyffels/html-to-pdf:latest               
