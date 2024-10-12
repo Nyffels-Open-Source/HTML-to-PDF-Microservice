@@ -56,4 +56,4 @@ jobs:
           context: ./dist
           pull: true
           push: true
-          tags: nyffelsit/html-to-pdf:${{ needs.setup.outputs.version }}, nyffelsit/html-to-pdf:dev
+          tags: nyffels/html-to-pdf:${{ needs.setup.outputs.version }}, nyffelsit/html-to-pdf:dev
