@@ -5,7 +5,7 @@ import swaggerUi from "swagger-ui-express";
 
 const router = express.Router();
 
-router.get("/status", async (_req, res) => {
+router.get("/health", async (_req, res) => {
   const controller = new StatusController();
   const response = await controller.getMessage();
   return res.send(response);

@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import { Body, Post, Route, Security } from 'tsoa';
+import {getBrowser} from "../core/puppeteer";
 
 interface PdfResponse {
   base64: string;
@@ -108,22 +109,23 @@ interface PdfRequest {
 
 @Route('html')
 export default class PdfController {
-  @Security('authorization')
   @Post('/')
   public async convertHtmlToPdf(@Body() request: PdfRequest): Promise<PdfResponse> {
-    const browser = await puppeteer.launch({
-			executablePath: '/usr/bin/google-chrome',
-      headless: true,
-			args: ['--no-sandbox',]
-		});
-    const page = await browser.newPage();
+    try {
+      const browser = await getBrowser();
+      const page = await browser.newPage();
 
-		await page.setContent(request.html);
-    const pdfBuffer = await page.pdf(request.options);
-    await browser.close();
+      await page.setContent(request.html);
+      const pdfBuffer = await page.pdf(request.options);
 
-    return {
-      base64: pdfBuffer.toString('base64'),
-    };
+      await page.close();
+
+      return {
+        base64: pdfBuffer.toString('base64'),
+      };
+    } catch (e) {
+      console.error('PDF rendering failed:', e);
+      throw new Error('PDF generation failed');
+    }
   }
 }

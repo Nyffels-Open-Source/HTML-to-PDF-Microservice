@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, {Application} from 'express';
 import morgan from 'morgan';
 import jsonData from "./swagger.json";
 import swaggerUi from 'swagger-ui-express';
@@ -6,16 +6,20 @@ import crypto from 'crypto';
 import bodyParser from 'body-parser';
 
 import Router from './routes';
-import { authentication } from './middleware/middleware';
+import {config} from 'dotenv';
 
-import { config } from 'dotenv';
 config();
 
-if (!process.env.PORT) process.env.PORT = '' + 80;
-if (!process.env.CODE) process.env.Code = crypto.randomBytes(20).toString('hex');
+if (!process.env.PORT) {
+  process.env.PORT = '' + 80;
+}
+if (!process.env.CODE) {
+  process.env.Code = crypto.randomBytes(20)
+    .toString('hex');
+}
 
 const app: Application = express();
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(express.static('public'));
@@ -33,9 +37,8 @@ app.use('/documentation', swaggerUi.serve, swaggerUi.setup(undefined, {
   })
 );
 
-app.use(authentication, Router);
+app.use( Router);
 
 app.listen(+process.env.PORT, () => {
   console.log('Server is running on port', process.env.PORT);
-  console.log('Authorization code:', process.env.CODE);
 });

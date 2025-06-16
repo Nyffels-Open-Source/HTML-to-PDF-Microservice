@@ -171,18 +171,6 @@
 				],
 				"type": "object",
 				"additionalProperties": false
-			},
-			"StatusResponse": {
-				"properties": {
-					"active": {
-						"type": "boolean"
-					}
-				},
-				"required": [
-					"active"
-				],
-				"type": "object",
-				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {
@@ -221,11 +209,7 @@
 						}
 					}
 				},
-				"security": [
-					{
-						"authorization": []
-					}
-				],
+				"security": [],
 				"parameters": [],
 				"requestBody": {
 					"required": true,
@@ -239,7 +223,7 @@
 				}
 			}
 		},
-		"/status": {
+		"/health": {
 			"get": {
 				"operationId": "GetMessage",
 				"responses": {
@@ -248,17 +232,13 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/StatusResponse"
+									"type": "string"
 								}
 							}
 						}
 					}
 				},
-				"security": [
-					{
-						"authorization": []
-					}
-				],
+				"security": [],
 				"parameters": []
 			}
 		}
