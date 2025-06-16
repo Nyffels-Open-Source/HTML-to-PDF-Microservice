@@ -1,5 +1,4 @@
-import puppeteer from 'puppeteer';
-import { Body, Post, Route, Security } from 'tsoa';
+import {Body, Post, Res, Route, TsoaResponse} from 'tsoa';
 import {getBrowser} from "../core/puppeteer";
 
 interface PdfResponse {
@@ -129,3 +128,4 @@ export default class PdfController {
     }
   }
 }
+

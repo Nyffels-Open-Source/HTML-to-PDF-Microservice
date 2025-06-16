@@ -37,7 +37,7 @@ app.use('/documentation', swaggerUi.serve, swaggerUi.setup(undefined, {
   })
 );
 
-app.use( Router);
+app.use(Router);
 
 app.listen(+process.env.PORT, () => {
   console.log('Server is running on port', process.env.PORT);
