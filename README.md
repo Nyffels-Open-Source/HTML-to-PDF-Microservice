@@ -1,26 +1,50 @@
-# HTML to PDF Docker swagger server
+# HTML to PDF Microservice
 
-A docker server with Swagger API implemented to convert HTML code to a PDF document.
+A Docker-based microservice that converts HTML to PDF (PDF/A-ready via separate post-processing). Built with Node.js, Puppeteer (with Chrome), and Swagger UI.
 
-## Installation
+## 🔧 Features
 
-use "docker run -d --restart unless-stopped nyffels/html-to-pdf" to start the server. 
+- HTML → PDF rendering via headless Chrome (Puppeteer)
+- Swagger UI available at `/docs`
+- Supports output as base64 or file
+- Full Docker build (includes TypeScript build)
+- Google Fonts included
 
-Possible environment variables are: 
-- CODE = The api key that can be used, if left empty, the server will generate a different one on every startup. 
-- PORT = The port that the application has to use.
+## 🚀 Installation (Docker)
 
-## Usage
+```bash
+docker run -d \
+  -p 8000:8000 \
+  --restart unless-stopped \
+  nyffels/html-to-pdf
+```
 
-For the swagger documentation go to http://<ip>/documentation. 
+### 📦 Environment Variables
 
-## Contributing
+| Variable | Description |
+|----------|-------------|
+| `PORT`   | (optional) Port the app runs on (default: 8000). |
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+## 📘 API Documentation
 
-Please make sure to update tests as appropriate.
+Once the container is running:
 
-## License
+```
+http://<host>:8000/docs
+```
+
+## 🧪 Local Development
+
+```bash
+docker compose up --build
+```
+
+Port 8000 is automatically exposed.
+
+## 🤝 Contributing
+
+PRs are welcome. For larger changes, please open an issue first. Don’t forget to update documentation or tests if applicable.
+
+## 📝 License
 
 [MIT](https://choosealicense.com/licenses/mit/)
