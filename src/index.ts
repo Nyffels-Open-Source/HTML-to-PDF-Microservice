@@ -13,10 +13,6 @@ config();
 if (!process.env.PORT) {
   process.env.PORT = '' + 8000;
 }
-if (!process.env.CODE) {
-  process.env.Code = crypto.randomBytes(20)
-    .toString('hex');
-}
 
 const app: Application = express();
 app.use(bodyParser.json({limit: '50mb'}));
