@@ -1,0 +1,10 @@
+services:
+  html-to-pdf:
+    build: .
+    container_name: html-to-pdf
+    ports:
+      - "8000:8000"
+    platform: linux/x86_64
+    environment:
+      - NODE_ENV=development
+    command: npm run start
