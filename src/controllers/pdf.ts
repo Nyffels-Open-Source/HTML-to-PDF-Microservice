@@ -1,11 +1,12 @@
 import {Body, Post, Res, Route, TsoaResponse} from 'tsoa';
 import {getBrowser} from "../core/puppeteer";
+import {convertHtmlToPdfBuffer} from "../core/pdf";
 
 interface PdfResponse {
     base64: string;
 }
 
-interface PdfRequest {
+export interface PdfRequest {
     html: string;
     options?: {
         /**
@@ -111,16 +112,9 @@ export default class PdfController {
     @Post('/base64')
     public async convertHtmlToPdfBase64(@Body() request: PdfRequest): Promise<PdfResponse> {
         try {
-            const browser = await getBrowser();
-            const page = await browser.newPage();
-
-            await page.setContent(request.html);
-            const pdfBuffer = await page.pdf(request.options);
-
-            await page.close();
-
+            const buffer = await convertHtmlToPdfBuffer(request);
             return {
-                base64: pdfBuffer.toString('base64'),
+                base64: buffer.toString('base64'),
             };
         } catch (e) {
             console.error('PDF rendering failed:', e);
@@ -130,13 +124,11 @@ export default class PdfController {
 
     @Post('/file')
     public async convertHtmlToPdfFile(@Body() request: PdfRequest): Promise<Buffer> {
-        const browser = await getBrowser();
-        const page = await browser.newPage();
-
-        await page.setContent(request.html, {waitUntil: 'networkidle0'});
-        const buffer = await page.pdf(request.options ?? {});
-
-        await browser.close();
-        return buffer;
+        try {
+            return await convertHtmlToPdfBuffer(request);
+        } catch (e) {
+            console.error('PDF rendering failed:', e);
+            throw new Error('PDF generation failed');
+        }
     }
 }

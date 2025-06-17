@@ -11,7 +11,7 @@ import {config} from 'dotenv';
 config();
 
 if (!process.env.PORT) {
-  process.env.PORT = '' + 80;
+  process.env.PORT = '' + 8000;
 }
 if (!process.env.CODE) {
   process.env.Code = crypto.randomBytes(20)
