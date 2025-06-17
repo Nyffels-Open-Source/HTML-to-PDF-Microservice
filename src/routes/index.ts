@@ -11,15 +11,22 @@ router.get("/health", async (_req, res) => {
   return res.send(response);
 });
 
-router.post("/html", async (_req, res) => {
+router.post("/pdf/base64", async (_req, res) => {
 	const controller = new PdfController();
-	const response = await controller.convertHtmlToPdf(_req.body);
+	const response = await controller.convertHtmlToPdfBase64(_req.body);
 	return res.send(response);
 });
 
-// router.post('async/html', async (_req, res) => {
-//   // const controller = new PdfController();
-//   return res.send("OK");
-// })
+router.post("/pdf/file", async (_req , res) => {
+    try {
+        const controller = new PdfController();
+        const buffer = await controller.convertHtmlToPdfFile(_req.body);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename="document.pdf"');
+        res.end(buffer);
+    } catch(err) {
+        res.status(500).json({ error: 'PDF generation failed', details: err instanceof Error ? err.message : err });
+    }
+});
 
 export default router;

@@ -91,7 +91,7 @@
 							},
 							"preferCSSPageSize": {
 								"type": "boolean",
-								"description": "Give any CSS `@page` size declared in the page priority over what is\r\ndeclared in the `width` or `height` or `format` option."
+								"description": "Give any CSS `@page` size declared in the page priority over what is\ndeclared in the `width` or `height` or `format` option."
 							},
 							"height": {
 								"anyOf": [
@@ -147,11 +147,11 @@
 							},
 							"footerTemplate": {
 								"type": "string",
-								"description": "HTML template for the print footer. Has the same constraints and support\r\nfor special classes as {@link PDFOptions.headerTemplate }."
+								"description": "HTML template for the print footer. Has the same constraints and support\nfor special classes as {@link PDFOptions.headerTemplate }."
 							},
 							"headerTemplate": {
 								"type": "string",
-								"description": "HTML template for the print header. Should be valid HTML with the following\r\nclasses used to inject values into them:\r\n\r\n- `date` formatted print date\r\n\r\n- `title` document title\r\n\r\n- `url` document location\r\n\r\n- `pageNumber` current page number\r\n\r\n- `totalPages` total pages in the document"
+								"description": "HTML template for the print header. Should be valid HTML with the following\nclasses used to inject values into them:\n\n- `date` formatted print date\n\n- `title` document title\n\n- `url` document location\n\n- `pageNumber` current page number\n\n- `totalPages` total pages in the document"
 							},
 							"displayHeaderFooter": {
 								"type": "boolean",
@@ -194,9 +194,9 @@
 		}
 	},
 	"paths": {
-		"/html": {
+		"/pdf/base64": {
 			"post": {
-				"operationId": "ConvertHtmlToPdf",
+				"operationId": "ConvertHtmlToPdfBase64",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -204,6 +204,36 @@
 							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/PdfResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/PdfRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/pdf/file": {
+			"post": {
+				"operationId": "ConvertHtmlToPdfFile",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string",
+									"format": "byte"
 								}
 							}
 						}

@@ -29,7 +29,7 @@ app.get('/swagger.json', (req, res) => {
 });
 
 
-app.use('/documentation', swaggerUi.serve, swaggerUi.setup(undefined, {
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(undefined, {
     customSiteTitle: 'HTML to PDF',
     swaggerOptions: {
       url: '/swagger.json',
