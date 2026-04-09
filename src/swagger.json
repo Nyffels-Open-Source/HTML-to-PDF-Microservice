@@ -19,151 +19,151 @@
 				"type": "object",
 				"additionalProperties": false
 			},
+			"PdfOptions": {
+				"properties": {
+					"scale": {
+						"type": "number",
+						"format": "double",
+						"description": "Scales the rendering of the web page. Amount must be between `0.1` and `2`."
+					},
+					"displayHeaderFooter": {
+						"type": "boolean",
+						"description": "Whether to show the header and footer."
+					},
+					"headerTemplate": {
+						"type": "string",
+						"description": "HTML template for the print header. Should be valid HTML with the following\nclasses used to inject values into them:\n\n- `date` formatted print date\n\n- `title` document title\n\n- `url` document location\n\n- `pageNumber` current page number\n\n- `totalPages` total pages in the document"
+					},
+					"footerTemplate": {
+						"type": "string",
+						"description": "HTML template for the print footer. Has the same constraints and support\nfor special classes as {@link PDFOptions.headerTemplate }."
+					},
+					"printBackground": {
+						"type": "boolean",
+						"description": "Set to `true` to print background graphics."
+					},
+					"landscape": {
+						"type": "boolean",
+						"description": "Whether to print in landscape orientation."
+					},
+					"pageRanges": {
+						"type": "string",
+						"description": "Paper ranges to print, e.g. `1-5, 8, 11-13`."
+					},
+					"format": {
+						"type": "string",
+						"enum": [
+							"letter",
+							"legal",
+							"tabloid",
+							"ledger",
+							"a0",
+							"a1",
+							"a2",
+							"a3",
+							"a4",
+							"a5",
+							"a6"
+						]
+					},
+					"width": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"type": "number",
+								"format": "double"
+							}
+						],
+						"description": "Sets the width of paper. You can pass in a number or a string with a unit."
+					},
+					"height": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"type": "number",
+								"format": "double"
+							}
+						],
+						"description": "Sets the height of paper. You can pass in a number or a string with a unit."
+					},
+					"preferCSSPageSize": {
+						"type": "boolean",
+						"description": "Give any CSS `@page` size declared in the page priority over what is\ndeclared in the `width` or `height` or `format` option."
+					},
+					"margin": {
+						"properties": {
+							"right": {
+								"anyOf": [
+									{
+										"type": "string"
+									},
+									{
+										"type": "number",
+										"format": "double"
+									}
+								]
+							},
+							"left": {
+								"anyOf": [
+									{
+										"type": "string"
+									},
+									{
+										"type": "number",
+										"format": "double"
+									}
+								]
+							},
+							"bottom": {
+								"anyOf": [
+									{
+										"type": "string"
+									},
+									{
+										"type": "number",
+										"format": "double"
+									}
+								]
+							},
+							"top": {
+								"anyOf": [
+									{
+										"type": "string"
+									},
+									{
+										"type": "number",
+										"format": "double"
+									}
+								]
+							}
+						},
+						"type": "object",
+						"description": "Set the PDF margins."
+					},
+					"omitBackground": {
+						"type": "boolean",
+						"description": "Hides default white background and allows generating pdfs with transparency."
+					},
+					"timeout": {
+						"type": "number",
+						"format": "double",
+						"description": "Timeout in milliseconds. Pass `0` to disable timeout."
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
 			"PdfRequest": {
 				"properties": {
 					"html": {
 						"type": "string"
 					},
 					"options": {
-						"properties": {
-							"timeout": {
-								"type": "number",
-								"format": "double",
-								"description": "Timeout in milliseconds. Pass `0` to disable timeout."
-							},
-							"omitBackground": {
-								"type": "boolean",
-								"description": "Hides default white background and allows generating pdfs with transparency."
-							},
-							"path": {
-								"type": "string",
-								"description": "The path to save the file to."
-							},
-							"margin": {
-								"properties": {
-									"right": {
-										"anyOf": [
-											{
-												"type": "string"
-											},
-											{
-												"type": "number",
-												"format": "double"
-											}
-										]
-									},
-									"left": {
-										"anyOf": [
-											{
-												"type": "string"
-											},
-											{
-												"type": "number",
-												"format": "double"
-											}
-										]
-									},
-									"bottom": {
-										"anyOf": [
-											{
-												"type": "string"
-											},
-											{
-												"type": "number",
-												"format": "double"
-											}
-										]
-									},
-									"top": {
-										"anyOf": [
-											{
-												"type": "string"
-											},
-											{
-												"type": "number",
-												"format": "double"
-											}
-										]
-									}
-								},
-								"type": "object",
-								"description": "Set the PDF margins."
-							},
-							"preferCSSPageSize": {
-								"type": "boolean",
-								"description": "Give any CSS `@page` size declared in the page priority over what is\ndeclared in the `width` or `height` or `format` option."
-							},
-							"height": {
-								"anyOf": [
-									{
-										"type": "string"
-									},
-									{
-										"type": "number",
-										"format": "double"
-									}
-								],
-								"description": "Sets the height of paper. You can pass in a number or a string with a unit."
-							},
-							"width": {
-								"anyOf": [
-									{
-										"type": "string"
-									},
-									{
-										"type": "number",
-										"format": "double"
-									}
-								],
-								"description": "Sets the width of paper. You can pass in a number or a string with a unit."
-							},
-							"format": {
-								"type": "string",
-								"enum": [
-									"letter",
-									"legal",
-									"tabloid",
-									"ledger",
-									"a0",
-									"a1",
-									"a2",
-									"a3",
-									"a4",
-									"a5",
-									"a6"
-								]
-							},
-							"pageRanges": {
-								"type": "string",
-								"description": "Paper ranges to print, e.g. `1-5, 8, 11-13`."
-							},
-							"landscape": {
-								"type": "boolean",
-								"description": "Whether to print in landscape orientation."
-							},
-							"printBackground": {
-								"type": "boolean",
-								"description": "Set to `true` to print background graphics."
-							},
-							"footerTemplate": {
-								"type": "string",
-								"description": "HTML template for the print footer. Has the same constraints and support\nfor special classes as {@link PDFOptions.headerTemplate }."
-							},
-							"headerTemplate": {
-								"type": "string",
-								"description": "HTML template for the print header. Should be valid HTML with the following\nclasses used to inject values into them:\n\n- `date` formatted print date\n\n- `title` document title\n\n- `url` document location\n\n- `pageNumber` current page number\n\n- `totalPages` total pages in the document"
-							},
-							"displayHeaderFooter": {
-								"type": "boolean",
-								"description": "Whether to show the header and footer."
-							},
-							"scale": {
-								"type": "number",
-								"format": "double",
-								"description": "Scales the rendering of the web page. Amount must be between `0.1` and `2`."
-							}
-						},
-						"type": "object"
+						"$ref": "#/components/schemas/PdfOptions"
 					}
 				},
 				"required": [
@@ -231,7 +231,7 @@
 					"200": {
 						"description": "Ok",
 						"content": {
-							"application/json": {
+							"application/pdf": {
 								"schema": {
 									"type": "string",
 									"format": "byte"

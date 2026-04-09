@@ -3,21 +3,21 @@ FROM node:20-slim AS builder
 
 WORKDIR /app
 
-# Dependencies voor fonts en tooling
+# Dependencies for fonts and tooling
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     gnupg \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy en install
+# Copy and install
 COPY package*.json ./
 RUN npm ci
 
-# Copy alle sources
+# Copy all sources
 COPY . .
 
-# Prebuild & build (tsoa spec, tsc, gulp, enz)
+# Prebuild and build (tsoa spec, tsc)
 RUN npm run prebuild && npm run build
 
 # ========== Runtime Stage ==========
@@ -66,6 +66,7 @@ COPY --from=builder /app/package*.json ./
 RUN npm ci --omit=dev
 
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/src/swagger.json ./dist/swagger.json
 
 EXPOSE 8000
 

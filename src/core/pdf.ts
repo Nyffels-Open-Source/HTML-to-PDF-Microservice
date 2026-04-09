@@ -1,14 +1,18 @@
-import {closeBrowser, getBrowser} from "./puppeteer";
-import {PdfRequest} from "../controllers/pdf";
+import { getBrowser } from './puppeteer';
+import { PdfRequest } from '../controllers/pdf';
 
 export async function convertHtmlToPdfBuffer(request: PdfRequest) {
-    const browser = await getBrowser();
-    const page = await browser.newPage();
+  const browser = await getBrowser();
+  const page = await browser.newPage();
 
-    await page.setContent(request.html);
-    const pdfBuffer = await page.pdf(request.options ?? {});
+  try {
+    await page.setContent(request.html, {
+      waitUntil: 'networkidle0',
+      timeout: request.options?.timeout ?? 30000,
+    });
 
-    await closeBrowser();
-
-    return pdfBuffer;
+    return await page.pdf(request.options ?? {});
+  } finally {
+    await page.close();
+  }
 }

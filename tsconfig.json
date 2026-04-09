@@ -3,6 +3,7 @@
     "target": "ES2022",
     "module": "commonjs",
     "outDir": "./dist",
+    "rootDir": "./src",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -10,9 +11,15 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ]
   },
-  "lib": [
-    "es2022"
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.json"
   ]
 }

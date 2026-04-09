@@ -7,4 +7,5 @@ services:
     platform: linux/x86_64
     environment:
       - NODE_ENV=development
+      - PORT=8000
     command: npm run start
