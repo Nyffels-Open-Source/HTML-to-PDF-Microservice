@@ -1,5 +1,6 @@
 import { Body, Post, Produces, Route } from 'tsoa';
 import { convertHtmlToPdfBuffer } from '../core/pdf';
+import { HttpError } from '../core/errors';
 
 interface PdfResponse {
   base64: string;
@@ -128,7 +129,11 @@ export default class PdfController {
       };
     } catch (e) {
       console.error('PDF rendering failed:', e);
-      throw new Error('PDF generation failed');
+      if (e instanceof HttpError) {
+        throw e;
+      }
+
+      throw new HttpError(500, 'PDF generation failed');
     }
   }
 
@@ -139,7 +144,11 @@ export default class PdfController {
       return await convertHtmlToPdfBuffer(sanitizePdfRequest(request));
     } catch (e) {
       console.error('PDF rendering failed:', e);
-      throw new Error('PDF generation failed');
+      if (e instanceof HttpError) {
+        throw e;
+      }
+
+      throw new HttpError(500, 'PDF generation failed');
     }
   }
 }

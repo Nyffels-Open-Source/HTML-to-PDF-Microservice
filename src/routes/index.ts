@@ -1,6 +1,8 @@
 import express from 'express';
 import PdfController from '../controllers/pdf';
 import StatusController from '../controllers/status';
+import { HttpError } from '../core/errors';
+import { getRenderQueueMetrics } from '../core/renderQueue';
 
 const router = express.Router();
 
@@ -10,13 +12,21 @@ router.get('/health', async (_req, res) => {
   return res.send(response);
 });
 
+router.get('/metrics', (_req, res) => {
+  return res.json({
+    status: 'ok',
+    renderQueue: getRenderQueueMetrics(),
+  });
+});
+
 router.post('/pdf/base64', async (req, res) => {
   try {
     const controller = new PdfController();
     const response = await controller.convertHtmlToPdfBase64(req.body);
     return res.send(response);
   } catch (err) {
-    return res.status(500).json({
+    const statusCode = err instanceof HttpError ? err.statusCode : 500;
+    return res.status(statusCode).json({
       error: 'PDF generation failed',
       details: err instanceof Error ? err.message : err,
     });
@@ -31,7 +41,8 @@ router.post('/pdf/file', async (req, res) => {
     res.setHeader('Content-Disposition', 'attachment; filename="document.pdf"');
     res.end(buffer);
   } catch (err) {
-    res.status(500).json({ error: 'PDF generation failed', details: err instanceof Error ? err.message : err });
+    const statusCode = err instanceof HttpError ? err.statusCode : 500;
+    res.status(statusCode).json({ error: 'PDF generation failed', details: err instanceof Error ? err.message : err });
   }
 });
 

@@ -26,6 +26,10 @@ docker run -d \
 | Variable | Description |
 |----------|-------------|
 | `PORT`   | Optional port the app runs on. Default: `8000`. |
+| `PDF_RENDER_CONCURRENCY` | Maximum number of concurrent PDF render jobs. Default: `4`. |
+| `PDF_RENDER_QUEUE_LIMIT` | Optional maximum number of queued render jobs before returning `503`. Unset by default, which keeps the queue internal and waits for capacity. |
+| `PDF_RENDER_WAIT_LOG_THRESHOLD_MS` | Logs a warning when a request waits at least this long for a render slot. Default: `1000`. |
+| `PUPPETEER_LAUNCH_TIMEOUT_MS` | Chromium launch timeout in milliseconds. Default: `60000`. |
 
 ## API Documentation
 
@@ -33,6 +37,12 @@ Once the container is running:
 
 ```text
 http://<host>:8000/docs
+```
+
+Queue metrics are available at:
+
+```text
+http://<host>:8000/metrics
 ```
 
 ## Local Development

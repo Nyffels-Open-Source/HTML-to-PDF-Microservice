@@ -2,6 +2,7 @@ import puppeteer, { Browser } from 'puppeteer';
 
 let browserInstance: Browser | null = null;
 let browserLaunchPromise: Promise<Browser> | null = null;
+const browserLaunchTimeout = Number(process.env.PUPPETEER_LAUNCH_TIMEOUT_MS) || 60000;
 
 /**
  * Returns a singleton Puppeteer browser instance.
@@ -18,6 +19,7 @@ export async function getBrowser(): Promise<Browser> {
     browserLaunchPromise = puppeteer.launch({
       headless: true,
       executablePath,
+      timeout: browserLaunchTimeout,
       args: ['--no-sandbox', '--disable-dev-shm-usage'],
     }).then((browser) => {
       browserInstance = browser;
