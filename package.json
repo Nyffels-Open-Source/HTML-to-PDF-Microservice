@@ -9,8 +9,8 @@
     "predev": "npm run swagger",
     "prebuild": "npm run swagger",
     "build": "tsc",
-    "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
-    "swagger": "tsoa spec"
+    "dev": "concurrently \"nodemon\" \"nodemon -x npm run swagger\"",
+    "swagger": "tsoa spec && node scripts/patch-swagger.js"
   },
   "nodemonConfig": {
     "watch": [

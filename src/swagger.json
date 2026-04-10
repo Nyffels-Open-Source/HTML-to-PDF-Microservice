@@ -1,5 +1,5 @@
 {
-	"openapi": "3.0.0",
+	"openapi": "3.1.0",
 	"components": {
 		"examples": {},
 		"headers": {},
@@ -67,26 +67,16 @@
 						]
 					},
 					"width": {
-						"anyOf": [
-							{
-								"type": "string"
-							},
-							{
-								"type": "number",
-								"format": "double"
-							}
+						"type": [
+							"string",
+							"number"
 						],
 						"description": "Sets the width of paper. You can pass in a number or a string with a unit."
 					},
 					"height": {
-						"anyOf": [
-							{
-								"type": "string"
-							},
-							{
-								"type": "number",
-								"format": "double"
-							}
+						"type": [
+							"string",
+							"number"
 						],
 						"description": "Sets the height of paper. You can pass in a number or a string with a unit."
 					},
@@ -97,47 +87,27 @@
 					"margin": {
 						"properties": {
 							"right": {
-								"anyOf": [
-									{
-										"type": "string"
-									},
-									{
-										"type": "number",
-										"format": "double"
-									}
+								"type": [
+									"string",
+									"number"
 								]
 							},
 							"left": {
-								"anyOf": [
-									{
-										"type": "string"
-									},
-									{
-										"type": "number",
-										"format": "double"
-									}
+								"type": [
+									"string",
+									"number"
 								]
 							},
 							"bottom": {
-								"anyOf": [
-									{
-										"type": "string"
-									},
-									{
-										"type": "number",
-										"format": "double"
-									}
+								"type": [
+									"string",
+									"number"
 								]
 							},
 							"top": {
-								"anyOf": [
-									{
-										"type": "string"
-									},
-									{
-										"type": "number",
-										"format": "double"
-									}
+								"type": [
+									"string",
+									"number"
 								]
 							}
 						},
